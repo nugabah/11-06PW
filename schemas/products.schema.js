@@ -6,17 +6,26 @@ const productSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    content : {
+    content: {
         type: String,
         required: true,
         unique: true
     },
-    author : {
-        type: String
+    author: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password : {
-        type: Number
+    password: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
+}, {
+    versionKey: false
 });
 
 module.exports = mongoose.model("products", productSchema);

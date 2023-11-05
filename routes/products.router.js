@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const Goods = require("../schemas/products.schema.js");
+const Products = require("../schemas/products.schema.js");
 
 router.get("/", (req, res) => {
     res.send("default url for goods.js GET Method");
@@ -14,21 +14,22 @@ router.get("/about", (req, res) => {
 });
 
 //상품 목록 조회 API
-router.get("/goods", (req, res) => {
-	res.json({Goods});
+router.get("/products", (req, res) => {
+	res.status(200).json({Products});
 });
 
-router.post("/goods", async (req, res) => {
-    const { goodsId, name, thumbnailUrl, category, price } = req.body;
+//상품 목록 생성
+router.post("/products", async (req, res) => {
+    const { title,content,author,password } = req.body;
 
-    const goods = await Goods.find({ goodsId });
-    if (goods.length) {
-        return res.status(400).json({ success: false, errorMessage: "이미 있는 데이터입니다." });
-    }
+    // const goods = await Products.find({ goodsId });
+    // if (goods.length) {
+    //     return res.status(400).json({ success: false, errorMessage: "이미 있는 데이터입니다." });
+    // }
+    const status = "FOR_SALE";
+    const createdGoods = await Products.create({ title,content,author,password,status });
 
-    const createdGoods = await Goods.create({ goodsId, name, thumbnailUrl, category, price });
-
-    res.json({ goods: createdGoods });
+    res.json({ products: createdGoods });
 });
 
 module.exports = router;

@@ -9,7 +9,7 @@ connect();
 
 app.use(express.json());
 
-app.use("/api", [goodsRouter]);
+app.use("/api", goodsRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
