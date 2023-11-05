@@ -23,6 +23,10 @@ const productSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Number,
+        required: true
     }
 }, {
     versionKey: false
