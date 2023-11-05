@@ -15,21 +15,24 @@ router.get("/about", (req, res) => {
 
 //상품 목록 조회 API
 router.get("/products", (req, res) => {
-	res.status(200).json({Products});
+    res.status(200).json({ Products });
 });
 
 //상품 목록 생성
 router.post("/products", async (req, res) => {
-    const { title,content,author,password } = req.body;
+    const { title, content, author, password } = req.body;
 
     // const goods = await Products.find({ goodsId });
-    // if (goods.length) {
-    //     return res.status(400).json({ success: false, errorMessage: "이미 있는 데이터입니다." });
-    // }
-    const status = "FOR_SALE";
-    const createdGoods = await Products.create({ title,content,author,password,status });
-
-    res.json({ products: createdGoods });
+    if (!Object.keys(req.body).length) {
+        return res.status(400).json({ "errorMessage" : '데이터 형식이 올바르지 않습니다.' });
+    }
+    try {
+        const status = "FOR_SALE";
+        await Products.create({ title, content, author, password, status });
+        res.json({ "message" : "판매 상품을 등록하였습니다." })
+    } catch (err) {
+        res.status(400).json({ "errorMessage" : "데이터 형식이 올바르지 않습니다." })
+    }
 });
 
 module.exports = router;
