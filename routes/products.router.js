@@ -16,14 +16,21 @@ router.get("/about", (req, res) => {
 //상품 목록 조회
 router.get("/products", async (req, res) => {
     const result = await Products.find({}).sort({ createdAt: -1 });
-    res.status(200).json({"data" : result});
+    res.status(200).json({ "data": result });
 });
 
 //상품 개별 조회
 router.get("/product/:productId", async (req, res) => {
-    const {productId} = req.params;
-    const result = await Products.find({productId});
-    res.status(200).json({"data" : result});
+    const { productId } = req.params;
+    if (!productId) {
+        res.status(400).json({ "message" : "데이터 형식이 올바르지 않습니다." });
+    }
+    try {
+        const result = await Products.findById(productId);
+        res.status(200).json({ "data": result });
+    } catch (err) {
+        res.status(404).json({ "Message" : "상품 조회에 실패하였습니다." })
+    }
 });
 
 //상품 등록
@@ -31,15 +38,15 @@ router.post("/products", async (req, res) => {
     const { title, content, author, password } = req.body;
 
     if (!Object.keys(req.body).length) {
-        return res.status(400).json({ "errorMessage" : '데이터 형식이 올바르지 않습니다.' });
+        return res.status(400).json({ "errorMessage": '데이터 형식이 올바르지 않습니다.' });
     }
     try {
         const status = "FOR_SALE";
         const createdAt = new Date();
         await Products.create({ title, content, author, password, status, createdAt });
-        res.json({ "message" : "판매 상품을 등록하였습니다." })
+        res.json({ "message": "판매 상품을 등록하였습니다." })
     } catch (err) {
-        res.status(400).json({ "errorMessage" : "데이터 형식이 올바르지 않습니다." })
+        res.status(400).json({ "errorMessage": "데이터 형식이 올바르지 않습니다." })
     }
 });
 
