@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const Goods = require("../schemas/goods");
+const Goods = require("../schemas/products.schema.js");
 
 router.get("/", (req, res) => {
     res.send("default url for goods.js GET Method");

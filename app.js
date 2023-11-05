@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const goodsRouter = require("./routes/goods.js")
+const goodsRouter = require("./routes/products.router.js")
 
 const connect = require("./schemas");
 connect();
