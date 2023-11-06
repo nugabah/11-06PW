@@ -1,10 +1,7 @@
 {
   "name": "justmall",
   "version": "1.0.0",
-<<<<<<< HEAD
   "type": "module",
-=======
->>>>>>> b87adf129e9d687b27074fbfe92eca011834fa1b
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -13,10 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "dotenv": "^16.3.1",
-=======
->>>>>>> b87adf129e9d687b27074fbfe92eca011834fa1b
     "express": "^4.18.2",
     "mongoose": "^8.0.0"
   }
