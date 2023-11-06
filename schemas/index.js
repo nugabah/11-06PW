@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -22,3 +23,18 @@ mongoose.connection.on('error', (err) => {
 });
 
 export default connect;
+=======
+const mongoose = require("mongoose");
+
+const connect = () => {
+    mongoose
+        .connect("mongodb://localhost:27017/mongo_pr")
+        .catch(err => console.log(err));
+};
+
+mongoose.connection.on("error", err => {
+    console.error("MongoDB 연결 에러", err);
+});
+
+module.exports = connect;
+>>>>>>> b87adf129e9d687b27074fbfe92eca011834fa1b
